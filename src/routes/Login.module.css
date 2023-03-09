@@ -1,0 +1,86 @@
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GangwonEdu_OTFBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+.ul{
+    list-style:none;
+    text-align: center;
+}
+
+
+.wrapper{
+    text-align: center;
+    margin: 50px auto;
+    width: 480px;
+    height: 450px;
+    border:solid 3px;
+    border-radius: 10%;
+	background-color:rgba(255, 255, 255, 0.9);/*까만색(0,0,0) 80% 불투명도*/
+}
+
+.h1{
+	font-size:30px;
+    margin-top:80px;
+	color:rgb(43, 150, 114);
+	margin-bottom: 20px;
+    font-family: 'yg-jalnan';
+}
+
+.input{
+    width: 80%;
+    height: 48px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    background-color: #F8F8F8;
+}
+
+#singup > input::placeholder{
+    color: #D2D2D2;
+}
+
+.button{
+    color: #fff;
+    font-size: 20px;
+    background-color: rgb(43, 150, 114);
+    margin-top: 20px;
+	border: 1px solid silver;
+	padding: 10px 140px;
+    font-family:'Pretendard-Regular';
+}
+
+.button:hover{
+    background-color:#222;
+	color:#fff;
+}
+.loginInform{
+    margin-left: 20%;
+}
+
+.a{
+    float:left;
+    margin-right:20px;
+    font-size:15px;
+    color:rgb(43, 150, 114);
+    font-family:'Pretendard-Regular';
+}

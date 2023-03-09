@@ -1,0 +1,162 @@
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {/*감성쩔*/
+    font-family: 'GangwonEdu_OTFBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face { /*에스코어 드림*/
+    font-family: 'S-CoreDream-3Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    margin:0 auto;;
+    padding:0;
+    box-sizing:border-box;
+    list-style:none;
+    text-decoration:none;
+
+}
+.formstyle{ /*전체 구조*/
+    margin:0 auto;
+    margin-top: 50px;
+}
+.photo img{
+   float:left;
+   width:100%;
+   height:220px;
+}
+.title{
+    float:left;
+    width:100%;
+    height:60px;
+    padding-top:5px;
+    /* background-color:#ffffff; */
+    font-family: 'S-CoreDream-3Light';
+    font-size:20px;
+    color:#375959;
+    font-weight:border;
+    padding-bottom:5px;
+}
+
+.writer{
+    float:left;
+    font-size:12px;
+    padding-top:5px;
+    color:#375959;
+    margin: 0 auto;
+    font-family: 'S-CoreDream-3Light';
+}
+.date{
+    float:right;
+    font-size:12px;
+    padding-top:5px;
+    color:#375959;
+    padding-right:5px;
+}
+#page_contorl{
+	text-align: center;
+	margin-bottom: 50px;
+}
+.page_li{
+	margin: 10px;
+	display: inline-block;
+	font-family: 'S-CoreDream-3Light';
+	color:black;
+}
+.page_li:hover{
+	color:red;
+	font-weight: bold;
+}
+#curPage{
+	color: red;
+	font-weight: bold;
+}
+
+.input{
+    width: 300px;
+    height: 48px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    background-color: #F8F8F8;
+}
+
+.font{
+    margin-right: 15px;
+	font-size:15px;
+	color:rgb(43, 150, 114);
+    font-family: 'yg-jalnan';
+}
+.table{
+    text-align: center;
+    margin:auto;
+    margin-top:50px;
+    width: 480px;
+    height: 450px;
+    border:solid 3px;
+    border-radius: 10%;
+    background-color:rgba(255, 255, 255, 0.9);/*까만색(0,0,0) 80% 불투명도*/
+}
+
+.inputText{
+    width: 300px;
+    height: 200px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    background-color: #F8F8F8;
+}
+
+.button{
+    margin: 20px;
+    width: 100px;
+    color: #fff;
+    font-size: 20px;
+    background-color: rgb(43, 150, 114);
+	border: 1px solid silver;
+	padding: 10px 10px;
+    font-family:'GangwonEdu_OTFBoldA';
+}
+
+.button_list{
+    color: #fff;
+    font-size: 17px;
+    background-color: rgb(43, 150, 114);
+	border: 1px solid silver;
+	padding: 3px 13px;
+    font-family:'GangwonEdu_OTFBoldA';
+}
+.tr{
+    margin: 0 auto;
+}
+.h1{
+    margin: 0 auto;
+	font-size:30px;
+    margin-top:80px;
+	color:rgb(43, 150, 114);
+    font-family: 'yg-jalnan';
+}
+.h1_2{
+    margin: 50px auto;
+	font-size:30px;
+	color:rgb(43, 150, 114);
+    font-family: 'yg-jalnan';
+}
+
+.div{
+    text-align: center;
+}
+.boardTitle{
+    text-decoration: none;
+    color: black;
+}
