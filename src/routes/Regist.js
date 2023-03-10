@@ -18,30 +18,53 @@ function Regist(){
     //id유효성 체크,비밀번호 유효성 체크
     const [checkId,setCheckId] = useState(null);
     const [checkPw,setCheckPw] = useState(null);
-    const [checkSameId,setSameCheckId] = useState(null);
+    const [checkPwCon,setCheckPwCon] = useState(null);
+
 
     //유효성 메세지
-    const [message,setMessage] = useState(null);
+    const [idMessage,setIdMessage] = useState(null);
+    const [pwMessage,setPwMessage] = useState(null);
+    const [pwConMessage,setConPwMessage] = useState(null);
+
 
     const onChangeId = (e)=>{
-        setId(e.target.value);
-        
-    }
-
-    useEffect(()=>{
-        if(id.length >=2 && id.length <=12){
-            setMessage("중복 체크를 해주세요!")
+        const currentId = e.target.value;
+        setId(currentId);
+        const regex = /[a-z0-9]{2,12}$/;
+        if(regex.test(currentId)){
+            setCheckId(false);
+            setIdMessage("중복 체크를해주세요")
         }else{
             setCheckId(false);
-            setMessage("2글자 이상 12글자 이하로 작성해주세요.")
+            setIdMessage("2~12 사이 숫자 및 영문만");
         }
-        if(id === ""){
-            setCheckId(null);
-        }
-    },[id]);
+        
+    }
+    // 정규식 쓰기 전 사용했던 코드
+    // useEffect(()=>{
+    //     if(id.length >=2 && id.length <=12){
+    //         setIdMessage("중복 체크를 해주세요!")
+    //     }else{
+    //         setCheckId(false);
+    //         setIdMessage("2글자 이상 12글자 이하로 작성해주세요.")
+    //     }
+    //     if(id === ""){
+    //         setCheckId(null);
+    //     }
+    // },[id]);
 
     const onChangePw = (e) =>{
-        setPassword(e.target.value);
+        const currentPw = e.target.value;
+        setPassword(currentPw);
+        const regex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
+        if(regex.test(currentPw)){
+            setPwMessage("안전한 비밀번호") ;
+            setCheckPw(true);
+        }else{
+           setPwMessage("숫자+영문자+특수문자 조합으로 8자리 입력");
+           setCheckPw(false);
+        }
+
     }
     
     
@@ -50,12 +73,14 @@ function Regist(){
     }
     useEffect(()=>{
         if(password === passwordConfirm){
-            setCheckPw(true);
+            setCheckPwCon(true);
+            setConPwMessage("비밀번호가 일치!")
         }else{
-            setCheckPw(false);
+            setCheckPwCon(false);
+            setConPwMessage("비밀번호가 불일치!")
         }
         if(passwordConfirm === ""){
-            setCheckPw(null);
+            setCheckPwCon(null);
         }
     },[password,passwordConfirm])
 
@@ -102,6 +127,8 @@ function Regist(){
 
     const reset = (e) =>{
         e.preventDefault();
+        setCheckId(null);
+        setCheckPw(null);
         setId("");
         setPassword("");
         setPasswordConfirm("");
@@ -117,10 +144,11 @@ function Regist(){
         .then(res =>{
             //length 가 0이 아니면 id가 검색 된거니 중복된 아이디!
             if(!(res.data.length >0) && id.length >=2 && id.length <=12){
-                setMessage("조건만족!")
-                setCheckId("true");
+                setIdMessage("조건만족!")
+                setCheckId(true);
             }else if(id.length >=2 && id.length <=12){
-                setMessage("중복된 아이디..!");
+                setCheckId(false);
+                setIdMessage("중복된 아이디..!");
             }
         }).catch(e =>{
             console.log(e);
@@ -142,17 +170,24 @@ function Regist(){
                                 <td><button style={{width:"77px",fontSize:"10px"}} onClick={sameCheck}>중복체크</button></td>
                             </tr>
                                     {/* 맨처음에 p값 안보여주기 위해 null 사용 */}
-                                    {checkId !== null ? checkId ? <tr><td></td><td><p style={{color:"green"}}>{message}</p></td></tr> : <tr><td></td><td><p style={{color:"red"}}>{message}</p></td></tr> : null}
+                                    {checkId !== null ? 
+                                        checkId ? <tr><td></td><td><p style={{color:"green"}}>{idMessage}</p></td></tr> 
+                                            : <tr><td></td><td><p style={{color:"red"}}>{idMessage}</p></td></tr> 
+                                        : null}
                             <tr>
                                 <td>비밀번호<span>(필수)</span></td>
-                                <td><input type="password" name="pw" value={password} onChange={onChangePw} required placeholder="비밀번호 8~12자리 특수기호 포함" /></td>
+                                <td><input type="password" name="pw" value={password} onChange={onChangePw} required placeholder="숫자,영문,특수기호 포함 8자리 이상" /></td>
                             </tr>
+                                {checkPw !== null ?
+                                    checkPw ? <tr><td></td><td><p style={{color:"green"}}>{pwMessage}</p></td></tr>
+                                        : <tr><td></td><td><p style={{color:"red"}}>{pwMessage}</p></td></tr>
+                                    :null}
                             <tr>
                                 <td>비밀번호 확인<span>(필수)</span></td>
                                 <td><input type="password" value={passwordConfirm} onChange={onChangePwCon} name="pw2" required /></td>
                                 {/* 맨처음에 p값 안보여주기 위해 null 사용 */}
-                                <td>{checkPw === null ? null :
-                                    checkPw ? <p style={{color:"green"}}>일치</p> : <p style={{color:"red"}}>불일치</p>
+                                <td>{checkPwCon === null ? null :
+                                    checkPwCon ? <p style={{color:"green"}}>{pwConMessage}</p> : <p style={{color:"red"}}>{pwConMessage}</p>
                                 }</td>
                             </tr>
                             <tr>
@@ -175,7 +210,7 @@ function Regist(){
                     </table>
                 </fieldset>
                 {/* id,pw조건이 만족하고 이름 주소 이메일 전화번호의 값이 들어가 있으면 가입하기 , 조건 만족 x disabled */}
-                {((checkId && checkPw) !== null) && (((checkId && checkPw) === true) && (name.length && addr.length && email.length && tel.length) > 0 ) ?
+                {((checkId && checkPwCon) !== null) && (((checkId && checkPwCon) === true) && (name.length && addr.length && email.length && tel.length) > 0 ) ?
                 <button>가입하기</button> : <button style={{background:"#eee"}} disabled>가입하기</button>
                 }
                 

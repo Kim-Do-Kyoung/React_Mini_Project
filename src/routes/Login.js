@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate  } from "react-router-dom";
 import styles from "./Login.module.css";
 
-function Login(loginCheck,setloginCheck){
+function Login(){
     //db에서 가져온 id,pw 데이터
     const [dbId,setDbId] = useState(null);
     const [dbPw,setDbPw] = useState(null);
@@ -16,10 +16,12 @@ function Login(loginCheck,setloginCheck){
 
     async function onSubmit(e){
         e.preventDefault();
+        
         if(dbId === id){
             if(dbPw === pw){
                 alert('로그인');
-                navigate('/',{state: {loginCheck:true}});
+                window.sessionStorage.setItem("userId", id);
+                navigate('/');
             }else{
                 alert('비밀번호가 다릅니다.')
                 setPw('');
@@ -37,10 +39,11 @@ function Login(loginCheck,setloginCheck){
             res.data.map((data =>(
                 setDbId(data.id)
             )));
-            res.data.map((data)=>{
-                setDbPw(data.pw);
-            })
+            res.data.map((data)=>(
+                setDbPw(data.pw)
+            ))
         });
+        console.log("onBlur!",dbId,dbPw);
     }
 
     useEffect(()=>{
@@ -52,13 +55,13 @@ function Login(loginCheck,setloginCheck){
         <div className={styles.wrapper}>
             <form onSubmit={onSubmit}>
                 <h1 className={styles.h1}>환영합니다!</h1>
-                <input className={styles.input} value={id} onChange={e=>{setId(e.target.value); }} onKeyUp={getDBdata} type="text" placeholder="id 입력"/> <br />
+                <input className={styles.input} value={id} onChange={e=>{setId(e.target.value); }} onBlur={getDBdata} type="text" placeholder="id 입력"/> <br />
                 <input className={styles.input} value={pw} onChange={e=>{setPw(e.target.value); }} type="password" placeholder="password 입력" />
                 <div className={styles.loginInform}>
                     <ul>
                         <Link to="/regist"><li className={styles.a}>회원가입</li></Link>
-                        <li className={styles.a}>ID 찾기</li>
-                        <li className={styles.a}>PW 찾기</li>
+                        <li className={styles.a} style={{color:"gray",textDecoration:"line-through"}}>ID 찾기</li>
+                        <li className={styles.a} style={{color:"gray",textDecoration:"line-through"}}>PW 찾기</li>
                     </ul>
                 </div>
                 <button className={styles.button}> LOGIN </button>

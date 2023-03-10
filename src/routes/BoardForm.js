@@ -46,9 +46,7 @@ function BoardForm(){
     axios.post("/update",data)
     .then(res =>{
       console.log("성공?",res);
-    }).catch(err =>{
-      console.log("에러 >>".err);
-    })
+    });
     navigate('/board');
     
   }

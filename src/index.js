@@ -7,7 +7,7 @@ import Footer from './components/footer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <div>
+    <div style={{background:"#eee"}}>
         <React.StrictMode>
             <Header />
             <App />

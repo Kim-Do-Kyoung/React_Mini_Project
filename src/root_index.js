@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const mysql = require("mysql");
-const { useParams } = require("react-router-dom");
 const PORT = process.env.port || 8000;
 
 const db = mysql.createPool({
@@ -18,8 +17,9 @@ app.listen(PORT, () => {
   console.log(`running on port ${PORT}`);
 });
 
-app.get("/board", (req, res) => {
-    const sqlQuery = "SELECT BOARD_ID, BOARD_TITLE, REGISTER_ID, DATE_FORMAT(REGISTER_DATE, '%Y-%m-%d') AS REGISTER_DATE FROM BOARD order by board_id desc;";
+app.get("/board/:page", (req, res) => {
+    const page = (req.params.page -1)*5 ;
+    const sqlQuery = `SELECT BOARD_ID, BOARD_TITLE, REGISTER_ID, DATE_FORMAT(REGISTER_DATE, '%Y-%m-%d') AS REGISTER_DATE FROM BOARD order by board_id desc limit ${page},5;`;
     db.query(sqlQuery, (err, result) => {
       res.send(result);
     });
@@ -97,4 +97,19 @@ app.get("/login/check/:id",(req,res)=>{
     db.query(sqlQuery,[id],(err,result)=>{
         res.send(result);
     })
+});
+
+app.post("/dummy/:count",(req,res)=>{
+    const count = req.params.count;
+    const sqlQuery = `insert into BOARD(BOARD_TITLE, BOARD_CONTENT, REGISTER_ID) values('더미${count}', '더미${count}', '더미')`;
+    db.query(sqlQuery,(err,result)=>{
+        res.send(result);
+    });
+});
+
+app.get("/count",(req,res)=>{
+    const sqlQuery = "select count(*) as count from board"
+    db.query(sqlQuery,(err,result)=>{
+        res.send(result);
+    });
 })

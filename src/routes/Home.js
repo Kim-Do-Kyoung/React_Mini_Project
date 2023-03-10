@@ -1,25 +1,23 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate} from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "./Home.module.css"
 
 
 function Home(){
-    const location = useLocation();
-    const navigate = useNavigate();
     const [loginCheck,setLoginCheck] = useState(false);
 
-
     useEffect(()=>{
-        if(location.state === null){
-            return;
+        if(window.sessionStorage.getItem("userId") === null){
+            setLoginCheck(false);
         }else{
-            setLoginCheck(location.state.loginCheck);
+            setLoginCheck(true);
         }
     },[])
 
     const onClick = (e) =>{
-        navigate('/',{state:{loginCheck:false}});
-        window.location.replace("/");
+        e.preventDefault();
+        window.sessionStorage.removeItem("userId");
+        window.location.replace("/")
     }
 
     return (

@@ -53,7 +53,7 @@ function BoardDetail(){
     }
 
     return (
-        <div style={{textAlign:"center",margin:"50px"}}>
+        <div style={{textAlign:"center",margin:"50px",background:"white",padding:"20px",borderRadius:"20px"}}>
             <Container className="panel">
                 <div style={{textAlign:"center"}}>
                     <FloatingLabel
