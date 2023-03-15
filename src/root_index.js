@@ -36,8 +36,9 @@ app.post("/delete",(req,res)=>{
 app.post("/insert",(req,res)=>{
     const title = req.body.title;
     const content = req.body.content;
-    const sqlQuery = `insert into BOARD(BOARD_TITLE, BOARD_CONTENT, REGISTER_ID) values(?, ?, '김도경(임시강제)')`;
-    db.query(sqlQuery,[title,content],(err,result)=>{
+    const id = req.body.id;
+    const sqlQuery = `insert into BOARD(BOARD_TITLE, BOARD_CONTENT, REGISTER_ID) values(?, ?, ?)`;
+    db.query(sqlQuery,[title,content,id],(err,result)=>{
         res.send(result);
     })
 });

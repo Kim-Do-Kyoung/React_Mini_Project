@@ -162,3 +162,14 @@
     text-decoration: none;
     color: black;
 }
+.selectButton{
+    background: none;
+    color: black;
+    width: 20px;
+    text-align: center;
+    margin: 5px;
+    font-size: 15px;
+}
+.selectButton:hover{
+    color: red;
+}

@@ -1,48 +1,108 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import styled from "../routes/Board.module.css"
 
 function Paging({page,setPage}){
     //게시글 전체갯수
     const [totalCount,setTotalCount] = useState(0);
+    
+    //페이지 갯수 담을 배열
+    const [array, setArray] = useState([]);
 
     //페이징 보여줄 갯수
-    const [showPage,setShowPage] = useState(5);
+    const showPage = 5;
 
-    const [pageNav,setPageNav] = useState([]);
+    //게시글 갯수
     const [pageCount,setPageCount] = useState(0);
 
-    const [loading,setLoading] = useState(false);
+    //페이지 변환state
+    const [isPageCh,setIsPageCh] = useState(false);
 
-    async function getTootalCount(){
-        await axios.get("/count")
-        .then(res =>{
-            setTotalCount(res.data[0].count);
-        });
-        setPageCount(Math.floor((totalCount / showPage)+(totalCount % showPage === 0 ? 0 : 1)));
-        let a;
-        for(let i =1; i<=pageCount; i++){
-            a.push(i);
+    const getTootalCount = () =>{
+        try{
+            axios.get("/count").then((res) => {
+                console.log("Count : ", res.data[0].count);
+                let tempTotal = res.data[0].count;
+                setTotalCount(res.data[0].count);
+                setPageCount(Math.floor((tempTotal / showPage)+(tempTotal % showPage === 0 ? 0 : 1)));
+                if(tempTotal === 0){
+                    setPageCount(1);
+                }
+            });
+        }catch(err){
+            console.log(err);
         }
-        setPageNav(a)
-        console.log("total>>",totalCount);
-        console.log("pageCount>>",pageCount)
-        console.log("pageNav>>",pageNav);
-        setLoading(true);
     }
-    
     useEffect(()=>{
         getTootalCount();
-    },[])
+        console.log(array);
+    },[]);
+
+    useEffect(() => {
+        let temp = [];
+        let startPage = ((page-1)/showPage)*showPage +1;
+        let endPage = startPage + showPage-1;
+        if(endPage > pageCount){
+            endPage = pageCount;
+        }
+        for(let i = startPage; i <= endPage; i ++) {
+            temp.push(i);
+        }
+        setArray(temp);
+        setIsPageCh(false);
+        console.log(temp);
+    }, [pageCount,isPageCh])
+
+    const prevButton = (e)=>{
+        e.preventDefault();
+        let pageTemp = page -1;
+        setPage(page -1);
+
+        if(pageTemp !== 0 && pageTemp % showPage === 0 ){
+            setPage(page-5);
+            setIsPageCh(true);
+        }
+        if(page === 1){
+            alert("이전으로 갈수 없음");
+            setPage(1);
+        }
+    }
+
+    const nextButton = (e) =>{
+        e.preventDefault();
+        setPage(page +1);
+        if(page % showPage === 0){
+            setIsPageCh(true);
+        }
+        if(pageCount<=page){
+            alert("마지막 페이지");
+            setPage(pageCount);
+        }
+    }
 
     return (
         <div>
-            {loading ? pageNav?.map(i =>(
-                <button key={i+1} onClick={()=>setPage(i+1)}>{i+1}</button>
-                
-            ))
-            : null}
+            <button onClick={prevButton} className={styled.selectButton}>&lt;</button>
+            {
+            array.map((list) => {
+                if(list === page){
+                    return(
+                    <button key={list} onClick={()=>setPage(list)}  style={{color:"red"}} className={styled.selectButton} disabled>
+                        {list}
+                    </button>   
+                    )
+                }else{
+                    return(
+                    <button key={list} onClick={()=>setPage(list)} className={styled.selectButton}>
+                    {list}
+                </button> 
+                    )
+                }
+                })
+            }
+        <button onClick={nextButton} className={styled.selectButton}>&gt;</button>
         </div>
-    );
-}
+     );
+};
 
 export default Paging;

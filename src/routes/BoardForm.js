@@ -18,7 +18,8 @@ function BoardForm(){
 
     const data = {
       'title' : title,
-      'content' : content
+      'content' : content,
+      "id" : window.sessionStorage.getItem("userId")
     }
 
     axios.post("/insert",data)

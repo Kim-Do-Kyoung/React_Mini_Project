@@ -15,7 +15,7 @@ function BoardDetail(){
     const [name,setName] = useState("");
     const [boardTitle,setBoardTitle] = useState("");
     const [boardContent,setBoardContent] = useState("");
-    
+
     useEffect(()=>{
         axios.get(`/detail/${params.board_id}`)
         .then(res =>{
@@ -87,9 +87,14 @@ function BoardDetail(){
                     className={styled.inputText} /><br />
                     </FloatingLabel>
                 </div>
+                {name === window.sessionStorage.getItem("userId") ? 
+                <>
+                    <Link to={`/board/write/${id}`}><button className={styled.button_list}>수정</button></Link>
+                    <button className={styled.button_list} onClick={boardDelete} >삭제</button>
+                </>
+            
+                : null}
                 
-                <Link to={`/board/write/${id}`}><button className={styled.button_list}>수정</button></Link>
-                <button className={styled.button_list} onClick={boardDelete} >삭제</button>
                 <button className={styled.button_list} onClick={onClick}>목록</button>
             </Container>
         </div>

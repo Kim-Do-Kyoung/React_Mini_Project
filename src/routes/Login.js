@@ -60,7 +60,7 @@ function Login(){
                 <div className={styles.loginInform}>
                     <ul>
                         <Link to="/regist"><li className={styles.a}>회원가입</li></Link>
-                        <li className={styles.a} style={{color:"gray",textDecoration:"line-through"}}>ID 찾기</li>
+                        <Link to="/idSearch"><li className={styles.a} style={{color:"gray",textDecoration:"line-through"}}>ID 찾기</li></Link>
                         <li className={styles.a} style={{color:"gray",textDecoration:"line-through"}}>PW 찾기</li>
                     </ul>
                 </div>

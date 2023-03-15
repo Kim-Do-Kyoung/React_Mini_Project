@@ -167,7 +167,7 @@ function Regist(){
                             <tr>
                                 <td>아이디<span>(필수)</span></td>
                                 <td><input type="text" name="id" required placeholder="2글자 이상 12글자 이하" value={id} onChange={onChangeId}/></td>
-                                <td><button style={{width:"77px",fontSize:"10px"}} onClick={sameCheck}>중복체크</button></td>
+                                <td><button style={{width:"77px",fontSize:"10px"}} onClick={sameCheck} className={styled.styleButton}>중복체크</button></td>
                             </tr>
                                     {/* 맨처음에 p값 안보여주기 위해 null 사용 */}
                                     {checkId !== null ? 
@@ -210,11 +210,11 @@ function Regist(){
                     </table>
                 </fieldset>
                 {/* id,pw조건이 만족하고 이름 주소 이메일 전화번호의 값이 들어가 있으면 가입하기 , 조건 만족 x disabled */}
-                {((checkId && checkPwCon) !== null) && (((checkId && checkPwCon) === true) && (name.length && addr.length && email.length && tel.length) > 0 ) ?
-                <button>가입하기</button> : <button style={{background:"#eee"}} disabled>가입하기</button>
+                {((checkId && checkPwCon) !== null) && (((checkId && checkPwCon) === true) && checkPw ===true && (name.length && addr.length && email.length && tel.length) > 0 ) ?
+                <button className={styled.styleButton}>가입하기</button> : <button style={{background:"#eee"}} disabled className={styled.styleButton}>가입하기</button>
                 }
                 
-                <button type="reset" onClick={reset}>다시작성</button>
+                <button type="reset" onClick={reset} className={styled.styleButton}>다시작성</button>
             </form>
         </div>
     );
