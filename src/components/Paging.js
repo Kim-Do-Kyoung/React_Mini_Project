@@ -21,7 +21,6 @@ function Paging({page,setPage}){
     const getTootalCount = () =>{
         try{
             axios.get("/count").then((res) => {
-                console.log("Count : ", res.data[0].count);
                 let tempTotal = res.data[0].count;
                 setTotalCount(res.data[0].count);
                 setPageCount(Math.floor((tempTotal / showPage)+(tempTotal % showPage === 0 ? 0 : 1)));
@@ -30,12 +29,10 @@ function Paging({page,setPage}){
                 }
             });
         }catch(err){
-            console.log(err);
         }
     }
     useEffect(()=>{
         getTootalCount();
-        console.log(array);
     },[]);
 
     useEffect(() => {
@@ -50,7 +47,6 @@ function Paging({page,setPage}){
         }
         setArray(temp);
         setIsPageCh(false);
-        console.log(temp);
     }, [pageCount,isPageCh])
 
     const prevButton = (e)=>{

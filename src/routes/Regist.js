@@ -113,15 +113,12 @@ function Regist(){
 
     const onSubmit = (e) =>{
         e.preventDefault();
-        console.log(id,password,passwordConfirm,name,addr,email,tel);
 
         axios.post("/regist",data)
         .then(res =>{
-            console.log("성공?>>",res);
             alert("가입 완료!");
             navigate('/login');
         }).catch(e =>{
-            console.log(e);
         })
     }
 
@@ -151,7 +148,6 @@ function Regist(){
                 setIdMessage("중복된 아이디..!");
             }
         }).catch(e =>{
-            console.log(e);
         })
     }
     

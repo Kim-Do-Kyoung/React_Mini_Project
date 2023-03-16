@@ -6,7 +6,8 @@ import BoardForm from "./routes/BoardForm"
 import { useState } from "react";
 import BoardDetail from "./routes/BoardDetail";
 import Regist from "./routes/Regist.js"
-import IdSearch from "./components/IdSearch";
+import IdSearch from "./routes/IdSearch";
+import NotFound from "./routes/NotFound";
 
 function App() {
   const [loginCheck,setLoginCheck] = useState(false);
@@ -22,6 +23,7 @@ function App() {
           <Route path="/board/detail/:board_id" element={<BoardDetail />} />
           <Route path="/regist" element={<Regist />} />
           <Route path="/idSearch" element={<IdSearch />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </div>

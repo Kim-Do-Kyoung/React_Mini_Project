@@ -13,8 +13,6 @@ function BoardForm(){
   const onSubmit = (e) => {
     e.preventDefault();
     alert("작성 완료!");
-    console.log(title);
-    console.log(content);
 
     const data = {
       'title' : title,
@@ -24,9 +22,7 @@ function BoardForm(){
 
     axios.post("/insert",data)
     .then(res =>{
-      console.log("성공?",res);
     }).catch(err =>{
-      console.log("에러 >>".err);
     })
     navigate('/board');
     
@@ -35,8 +31,6 @@ function BoardForm(){
   function update(e){
     e.preventDefault();
     alert("수정 완료!");
-    console.log(title);
-    console.log(content);
 
     const data = {
       'id' : id,
@@ -46,7 +40,6 @@ function BoardForm(){
 
     axios.post("/update",data)
     .then(res =>{
-      console.log("성공?",res);
     });
     navigate('/board');
     
@@ -66,11 +59,9 @@ function BoardForm(){
   }
 
   const params = useParams();
-  console.log(params);
   useEffect(()=>{
     axios.get(`/list/${params.board_id}`)
     .then(res =>{
-      console.log("데이터?>>",res.data);
       res.data.map((data)=>{
         setId(data.BOARD_ID);
         setTitle(data.BOARD_TITLE);

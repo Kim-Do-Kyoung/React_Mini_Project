@@ -19,7 +19,6 @@ function BoardDetail(){
     useEffect(()=>{
         axios.get(`/detail/${params.board_id}`)
         .then(res =>{
-            console.log(res.data);
             res.data.map((data) => (
                 setId(data.BOARD_ID),
                 setName(data.REGISTER_ID),
@@ -45,10 +44,8 @@ function BoardDetail(){
     
         axios.post("/delete",data,config)
             .then(res=>{
-                console.log("성공?",res);
                 navigate("/board");
             }).catch(err =>{
-                console.log("에러>>",err);
         })
     }
 

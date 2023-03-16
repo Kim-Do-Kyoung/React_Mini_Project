@@ -20,7 +20,6 @@ function BoardList(){
             setBoard(response.data);
         })
       }catch(e){
-        console.log(e);
       }
     }
     useEffect(() => {

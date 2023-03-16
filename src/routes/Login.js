@@ -43,7 +43,6 @@ function Login(){
                 setDbPw(data.pw)
             ))
         });
-        console.log("onBlur!",dbId,dbPw);
     }
 
     useEffect(()=>{
